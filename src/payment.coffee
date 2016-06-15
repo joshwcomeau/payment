@@ -448,12 +448,12 @@ class Payment
         groups?.shift()
         groups?.join(' ')
   @restrictNumeric: (el) ->
-    QJ.on el, 'keypress', restrictNumeric
+    QJ.on el, 'keydown', restrictNumeric
   @cardExpiryVal: (el) ->
     Payment.fns.cardExpiryVal(QJ.val(el))
   @formatCardCVC: (el) ->
     Payment.restrictNumeric el
-    QJ.on el, 'keypress', restrictCVC
+    QJ.on el, 'keydown', restrictCVC
     el
   @formatCardExpiry: (el) ->
     Payment.restrictNumeric el
@@ -461,20 +461,20 @@ class Payment
       [month, year] = el
       @formatCardExpiryMultiple month, year
     else
-      QJ.on el, 'keypress', restrictCombinedExpiry
-      QJ.on el, 'keypress', formatExpiry
-      QJ.on el, 'keypress', formatForwardSlash
-      QJ.on el, 'keypress', formatForwardExpiry
+      QJ.on el, 'keydown', restrictCombinedExpiry
+      QJ.on el, 'keydown', formatExpiry
+      QJ.on el, 'keydown', formatForwardSlash
+      QJ.on el, 'keydown', formatForwardExpiry
       QJ.on el, 'keydown', formatBackExpiry
     el
   @formatCardExpiryMultiple: (month, year) ->
-    QJ.on month, 'keypress', restrictMonthExpiry
-    QJ.on month, 'keypress', formatMonthExpiry
-    QJ.on year, 'keypress', restrictYearExpiry
+    QJ.on month, 'keydown', restrictMonthExpiry
+    QJ.on month, 'keydown', formatMonthExpiry
+    QJ.on year, 'keydown', restrictYearExpiry
   @formatCardNumber: (el) ->
     Payment.restrictNumeric el
-    QJ.on el, 'keypress', restrictCardNumber
-    QJ.on el, 'keypress', formatCardNumber
+    QJ.on el, 'keydown', restrictCardNumber
+    QJ.on el, 'keydown', formatCardNumber
     QJ.on el, 'keydown', formatBackCardNumber
     QJ.on el, 'keyup', setCardType
     QJ.on el, 'paste', reFormatCardNumber
